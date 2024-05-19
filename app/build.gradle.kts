@@ -34,7 +34,7 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClass.set("basedtimber.Main")
+    mainClass.set("io.papermc.basedtimber.main")
 }
 
 tasks.named<Test>("test") {
