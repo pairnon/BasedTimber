@@ -1,0 +1,7 @@
+name: BasedTimber
+version: 0.0.1
+main: io.papermc.basedtimber.Main
+description: The based timber plugin
+author: pairnon
+website: https://github.com/pairnon/BasedTimber
+api-version: '1.20'
