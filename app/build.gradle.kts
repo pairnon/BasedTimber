@@ -34,7 +34,7 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClass.set("basedtimber.App")
+    mainClass.set("basedtimber.Main")
 }
 
 tasks.named<Test>("test") {
