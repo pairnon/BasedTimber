@@ -1,5 +1,6 @@
 package io.papermc.basedtimber;
 
+import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -24,13 +25,14 @@ public class CommandToggleTimber implements CommandExecutor {
             if (s.equals(displayname)) {
                 Main.timberEnabledPlayers.remove(s);
                 player.sendMessage(Component.text("Disabled timber mode.", NamedTextColor.GOLD));
+                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_SNARE, 1.0F, 1.0F);
                 return true;
             }
         }
         
         Main.timberEnabledPlayers.add(displayname);
         player.sendMessage(Component.text("Enabled timber mode.", NamedTextColor.GOLD));
-
+        player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HARP, 1.0F, 1.0F);
         return true;
     }
 }
