@@ -14,6 +14,8 @@ public class Main extends JavaPlugin implements Listener {
         Bukkit.getPluginManager().registerEvents(this, this);
 
         getServer().getPluginManager().registerEvents(new BlockBreakListener(), this);
+
+        this.getCommand("registerlog").setExecutor(new CommandRegisterLog());
     }
 
     @EventHandler
