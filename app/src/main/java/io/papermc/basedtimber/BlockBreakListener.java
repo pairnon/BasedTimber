@@ -22,9 +22,9 @@ public class BlockBreakListener implements Listener {
                 for (int i = 1; i < maxTreeHeight; i++) {
                     Block aboveBlock = brokenBlock.getRelative(BlockFace.UP, i);
                     if (!aboveBlock.getType().equals(brokenBlock.getType())) { return; }
-                    aboveBlock.setType(Material.AIR);
                     ItemStack droppedItem = new ItemStack(aboveBlock.getType());
                     aboveBlock.getWorld().dropItemNaturally(aboveBlock.getLocation(), droppedItem);
+                    aboveBlock.setType(Material.AIR);
                 }
             }
         }
