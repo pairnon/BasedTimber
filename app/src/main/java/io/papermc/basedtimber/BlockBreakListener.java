@@ -18,16 +18,19 @@ public class BlockBreakListener implements Listener {
         Block brokenBlock = event.getBlock();
         for (Material log : logMaterials) {
             if (brokenBlock.getType().equals(log)) {
-                event.getPlayer().sendMessage("you just broke a log!");
                 for (int i = 1; i < maxTreeHeight; i++) {
                     Block aboveBlock = brokenBlock.getRelative(BlockFace.UP, i);
                     if (!aboveBlock.getType().equals(brokenBlock.getType())) { return; }
-                    ItemStack droppedItem = new ItemStack(aboveBlock.getType());
-                    aboveBlock.getWorld().dropItemNaturally(aboveBlock.getLocation(), droppedItem);
+                    dropItem(aboveBlock);
                     aboveBlock.setType(Material.AIR);
                 }
             }
         }
+    }
+
+    private void dropItem(Block aboveBlock) {
+        ItemStack droppedItem = new ItemStack(aboveBlock.getType());
+        aboveBlock.getWorld().dropItemNaturally(aboveBlock.getLocation(), droppedItem);
     }
 
 }
