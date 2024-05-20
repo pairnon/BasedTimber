@@ -10,13 +10,12 @@ import org.bukkit.inventory.ItemStack;
 
 public class BlockBreakListener implements Listener {
 
-    public static Material[] logMaterials = {Material.OAK_LOG, Material.SPRUCE_LOG, Material.BIRCH_LOG, Material.JUNGLE_LOG, Material.ACACIA_LOG, Material.DARK_OAK_LOG, Material.MANGROVE_LOG, Material.CHERRY_LOG};
     private static int maxTreeHeight = 31;
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
         Block brokenBlock = event.getBlock();
-        for (Material log : logMaterials) {
+        for (Material log : Main.logMaterials) {
             if (brokenBlock.getType().equals(log)) {
                 for (int i = 1; i < maxTreeHeight; i++) {
                     Block aboveBlock = brokenBlock.getRelative(BlockFace.UP, i);

@@ -6,6 +6,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.persistence.PersistentDataContainer;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -19,13 +20,14 @@ public class CommandRegisterLog implements CommandExecutor {
 
         Player player = (Player) sender;
         ItemStack itemStackInHand = player.getInventory().getItemInMainHand();
-        for ( Material m : BlockBreakListener.logMaterials ) {
-            if (itemStackInHand.getType().equals(m)) {
+        for ( Material m : Main.logMaterials ) {
+            if (m.equals(itemStackInHand.getType())) {
+                PersistentDataContainer container = itemStackInHand.getItemMeta().getPersistentDataContainer();
                 player.sendMessage(Component.text("Registered logs", NamedTextColor.GREEN));
             }
         }
         
-        return true;
+        return false;
     }
 
 }
