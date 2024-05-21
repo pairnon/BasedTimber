@@ -9,6 +9,9 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 
+import de.tr7zw.changeme.nbtapi.NBTBlock;
+import de.tr7zw.changeme.nbtapi.NBTCompound;
+
 @SuppressWarnings("deprecation")
 public class BlockBreakListener implements Listener {
 
@@ -25,12 +28,24 @@ public class BlockBreakListener implements Listener {
             if (brokenBlock.getType().equals(log)) {
                 for (int i = 1; i < maxTreeHeight; i++) {
                     Block aboveBlock = brokenBlock.getRelative(BlockFace.UP, i);
+                    if (!canTimber(aboveBlock)) { return; }
                     if (!aboveBlock.getType().equals(brokenBlock.getType())) { return; }
                     dropItem(aboveBlock);
                     aboveBlock.setType(Material.AIR);
                 }
             }
         }
+    }
+
+    private boolean canTimber(Block block) {
+
+        NBTBlock nbtBlock = new NBTBlock(block);
+
+        NBTCompound c = nbtBlock.getData();
+
+        boolean ignore = c.getBoolean("ignoreLog");
+        
+        return !ignore;
     }
 
     private boolean hasTimberEnabled(Player player) {
