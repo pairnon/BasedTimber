@@ -22,6 +22,10 @@ repositories {
         name = "papermc"
         url = uri("https://repo.papermc.io/repository/maven-public/")
     }
+    maven {
+        name = "CodeMC"
+        url = uri("https://repo.codemc.io/repository/maven-public/")
+    }
 }
 
 dependencies {
@@ -32,6 +36,8 @@ dependencies {
     implementation("com.google.guava:guava:31.1-jre")
 
     compileOnly("io.papermc.paper:paper-api:1.20.2-R0.1-SNAPSHOT")
+
+    compileOnly("de.tr7zw:item-nbt-api:2.12.4")
 }
 
 application {
