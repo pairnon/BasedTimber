@@ -12,6 +12,7 @@ plugins {
 
     // Run-Task automatically downloads a Paper server and runs it
     id("xyz.jpenilla.run-paper") version "2.2.0"
+    id("com.github.johnrengelman.shadow") version "8.1.1"
 }
 
 repositories {
@@ -37,7 +38,7 @@ dependencies {
 
     compileOnly("io.papermc.paper:paper-api:1.20.2-R0.1-SNAPSHOT")
 
-    compileOnly("de.tr7zw:item-nbt-api:2.12.4")
+    implementation("de.tr7zw:item-nbt-api:2.12.4")
 }
 
 application {
@@ -56,5 +57,11 @@ tasks {
         // This is the only required configuration besides applying the plugin.
         // Your plugin's jar (or shadowJar if present) will be used automatically.
         minecraftVersion("1.20.2")
+    }
+    shadowJar {
+        relocate("de.tr7zw.changeme.nbtapi", "io.papermc.basedtimber")
+    }
+    build {
+        dependsOn(shadowJar)
     }
 }
