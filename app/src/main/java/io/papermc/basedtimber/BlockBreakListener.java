@@ -1,5 +1,6 @@
 package io.papermc.basedtimber;
 
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
@@ -34,22 +35,29 @@ public class BlockBreakListener implements Listener {
                     
                     ItemStack heldItem = player.getInventory().getItemInMainHand();
                     if (heldItem == null || !isAxe(heldItem))  { return; }
-                    
-                    Damageable d = (Damageable) heldItem.getItemMeta();
-                    int currentDamage = d.getDamage();
-                    int maxDamage = heldItem.getType().getMaxDurability();
-                    d.setDamage(currentDamage + 1);
-                    if (d.getDamage() >= maxDamage) {
-                        heldItem.setType(Material.AIR);
-                        return;
+
+                    if (!player.getGameMode().equals(GameMode.CREATIVE)) {
+                        if (!updateToolDamage(heldItem)) { return; }
                     }
-                    heldItem.setItemMeta(d);
 
                     dropItem(aboveBlock);
                     aboveBlock.setType(Material.AIR);
                 }
             }
         }
+    }
+
+    private boolean updateToolDamage(ItemStack itemStack) {
+        Damageable d = (Damageable) itemStack.getItemMeta();
+        int currentDamage = d.getDamage();
+        int maxDamage = itemStack.getType().getMaxDurability();
+        d.setDamage(currentDamage + 1);
+        if (d.getDamage() >= maxDamage) {
+            itemStack.setType(Material.AIR);
+            return false;
+        }
+        itemStack.setItemMeta(d);
+        return true;
     }
 
     private boolean isAxe(ItemStack itemStack) {
