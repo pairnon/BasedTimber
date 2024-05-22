@@ -8,6 +8,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.Damageable;
 
 import de.tr7zw.changeme.nbtapi.NBTBlock;
 import de.tr7zw.changeme.nbtapi.NBTCompound;
@@ -30,11 +31,32 @@ public class BlockBreakListener implements Listener {
                     Block aboveBlock = brokenBlock.getRelative(BlockFace.UP, i);
                     if (!canTimber(aboveBlock)) { return; }
                     if (!aboveBlock.getType().equals(brokenBlock.getType())) { return; }
+                    
+                    ItemStack heldItem = player.getInventory().getItemInMainHand();
+                    if (heldItem == null || !isAxe(heldItem))  { return; }
+                    
+                    Damageable d = (Damageable) heldItem.getItemMeta();
+                    int currentDamage = d.getDamage();
+                    int maxDamage = heldItem.getType().getMaxDurability();
+                    d.setDamage(currentDamage + 1);
+                    if (d.getDamage() >= maxDamage) {
+                        heldItem.setType(Material.AIR);
+                        return;
+                    }
+                    heldItem.setItemMeta(d);
+
                     dropItem(aboveBlock);
                     aboveBlock.setType(Material.AIR);
                 }
             }
         }
+    }
+
+    private boolean isAxe(ItemStack itemStack) {
+        for (Material m : Main.axeMaterials) {
+            if (itemStack.getType().equals(m)) { return true; }
+        }
+        return false;
     }
 
     private boolean canTimber(Block block) {
