@@ -17,7 +17,7 @@ public class BlockPlaceListener implements Listener {
         if (!isLog(block)) { return; }
         NBTBlock nbtBlock = new NBTBlock(block);
         NBTCompound c = nbtBlock.getData();
-        c.setBoolean("ignoreLog", true);
+        c.setBoolean(Main.IGNORE_KEY, true);
     }
 
     private boolean isLog(Block block) {

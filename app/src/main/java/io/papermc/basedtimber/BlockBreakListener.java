@@ -43,7 +43,7 @@ public class BlockBreakListener implements Listener {
 
         NBTCompound c = nbtBlock.getData();
 
-        boolean ignore = c.getBoolean("ignoreLog");
+        boolean ignore = c.getBoolean(Main.IGNORE_KEY);
         
         return !ignore;
     }
