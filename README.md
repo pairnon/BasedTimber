@@ -1,8 +1,11 @@
 # BasedTimber
 
-The based timber plugin
+The based timber plugin.
 
-_Currently in development_
+- Allows players to instantly chop down vertical stacks of tree logs (axe required)
+- Ignores logs detected as player-built
+
+Usage: `/toggletimber`
 
 ## Notes
 
