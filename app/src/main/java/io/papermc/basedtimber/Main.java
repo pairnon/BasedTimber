@@ -4,9 +4,7 @@ import java.util.ArrayList;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin implements Listener {
@@ -28,9 +26,4 @@ public class Main extends JavaPlugin implements Listener {
 
         timberEnabledPlayers = new ArrayList<String>();
     }
-
-    @EventHandler
-    public void onPlayerJoin(PlayerJoinEvent event) {
-    }
-
 }
