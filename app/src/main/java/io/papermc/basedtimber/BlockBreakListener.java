@@ -17,8 +17,6 @@ import de.tr7zw.changeme.nbtapi.NBTCompound;
 @SuppressWarnings("deprecation")
 public class BlockBreakListener implements Listener {
 
-    private static int maxTreeHeight = 31;
-
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
 
@@ -26,9 +24,9 @@ public class BlockBreakListener implements Listener {
         if (!hasTimberEnabled(player)) { return; }
 
         Block brokenBlock = event.getBlock();
-        for (Material log : Main.logMaterials) {
+        for (Material log : Main.LOG_MATERIALS) {
             if (brokenBlock.getType().equals(log)) {
-                for (int i = 1; i < maxTreeHeight; i++) {
+                for (int i = 1; i < Main.MAX_TREE_HEIGHT; i++) {
                     Block aboveBlock = brokenBlock.getRelative(BlockFace.UP, i);
                     if (!canTimber(aboveBlock)) { return; }
                     if (!aboveBlock.getType().equals(brokenBlock.getType())) { return; }
@@ -61,7 +59,7 @@ public class BlockBreakListener implements Listener {
     }
 
     private boolean isAxe(ItemStack itemStack) {
-        for (Material m : Main.axeMaterials) {
+        for (Material m : Main.AXE_MATERIALS) {
             if (itemStack.getType().equals(m)) { return true; }
         }
         return false;
