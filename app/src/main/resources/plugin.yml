@@ -1,7 +1,7 @@
 name: BasedTimber
 version: 1.0.3
 main: io.papermc.basedtimber.Main
-description: The based timber plugin
+description: Tree timber plugin
 author: pairnon
 website: https://github.com/pairnon/BasedTimber
 api-version: '1.20'

@@ -1,6 +1,6 @@
 # BasedTimber
 
-The based timber plugin.
+Tree timber plugin for Minecraft servers
 
 - Allows players to instantly chop down vertical stacks of tree logs (axe required)
 - Ignores logs detected as player-built
